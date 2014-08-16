@@ -19,6 +19,18 @@
 		1A626AD019913F8100CE50F1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A626AB819913F8100CE50F1 /* UIKit.framework */; };
 		1A626AD819913F8100CE50F1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1A626AD619913F8100CE50F1 /* InfoPlist.strings */; };
 		1A626ADA19913F8100CE50F1 /* JS_PongTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A626AD919913F8100CE50F1 /* JS_PongTests.m */; };
+		1A626AE41991412B00CE50F1 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A626AE31991412B00CE50F1 /* Main_iPhone.storyboard */; };
+		1A626AE6199141A700CE50F1 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A626AE5199141A700CE50F1 /* Main_iPad.storyboard */; };
+		1A626AEB1992453D00CE50F1 /* JSPongPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A626AEA1992453D00CE50F1 /* JSPongPlayViewController.m */; };
+		1A626AEE1992460000CE50F1 /* JSPongMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A626AED1992460000CE50F1 /* JSPongMenuViewController.m */; };
+		1A626AF219925E3000CE50F1 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A626AF019925E3000CE50F1 /* bg.png */; };
+		1A626AF319925E3000CE50F1 /* pad.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A626AF119925E3000CE50F1 /* pad.png */; };
+		1A626AF7199264C700CE50F1 /* JSPongPuck.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A626AF6199264C700CE50F1 /* JSPongPuck.m */; };
+		1A7D6DD2199FA46B0031E425 /* JSPongHostGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A7D6DD1199FA46B0031E425 /* JSPongHostGameViewController.m */; };
+		1A7D6DD5199FA4A70031E425 /* JSPongJoinGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A7D6DD4199FA4A70031E425 /* JSPongJoinGameViewController.m */; };
+		1A7D6DD7199FB1330031E425 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A7D6DD6199FB1330031E425 /* GameKit.framework */; };
+		1A7D6DDA199FB22B0031E425 /* JSPongServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A7D6DD9199FB22B0031E425 /* JSPongServer.m */; };
+		1AC3670E199FB83A00F491F5 /* JSPongClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC3670D199FB83A00F491F5 /* JSPongClient.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +60,25 @@
 		1A626AD519913F8100CE50F1 /* JS PongTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JS PongTests-Info.plist"; sourceTree = "<group>"; };
 		1A626AD719913F8100CE50F1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1A626AD919913F8100CE50F1 /* JS_PongTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JS_PongTests.m; sourceTree = "<group>"; };
+		1A626AE31991412B00CE50F1 /* Main_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPhone.storyboard; sourceTree = "<group>"; };
+		1A626AE5199141A700CE50F1 /* Main_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main_iPad.storyboard; path = ../Main_iPad.storyboard; sourceTree = "<group>"; };
+		1A626AE91992453D00CE50F1 /* JSPongPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSPongPlayViewController.h; sourceTree = "<group>"; };
+		1A626AEA1992453D00CE50F1 /* JSPongPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSPongPlayViewController.m; sourceTree = "<group>"; };
+		1A626AEC1992460000CE50F1 /* JSPongMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSPongMenuViewController.h; sourceTree = "<group>"; };
+		1A626AED1992460000CE50F1 /* JSPongMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSPongMenuViewController.m; sourceTree = "<group>"; };
+		1A626AF019925E3000CE50F1 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
+		1A626AF119925E3000CE50F1 /* pad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pad.png; sourceTree = "<group>"; };
+		1A626AF5199264C700CE50F1 /* JSPongPuck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSPongPuck.h; sourceTree = "<group>"; };
+		1A626AF6199264C700CE50F1 /* JSPongPuck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSPongPuck.m; sourceTree = "<group>"; };
+		1A7D6DD0199FA46B0031E425 /* JSPongHostGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSPongHostGameViewController.h; sourceTree = "<group>"; };
+		1A7D6DD1199FA46B0031E425 /* JSPongHostGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSPongHostGameViewController.m; sourceTree = "<group>"; };
+		1A7D6DD3199FA4A70031E425 /* JSPongJoinGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSPongJoinGameViewController.h; sourceTree = "<group>"; };
+		1A7D6DD4199FA4A70031E425 /* JSPongJoinGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSPongJoinGameViewController.m; sourceTree = "<group>"; };
+		1A7D6DD6199FB1330031E425 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		1A7D6DD8199FB22B0031E425 /* JSPongServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSPongServer.h; sourceTree = "<group>"; };
+		1A7D6DD9199FB22B0031E425 /* JSPongServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSPongServer.m; sourceTree = "<group>"; };
+		1AC3670C199FB83A00F491F5 /* JSPongClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSPongClient.h; sourceTree = "<group>"; };
+		1AC3670D199FB83A00F491F5 /* JSPongClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSPongClient.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A7D6DD7199FB1330031E425 /* GameKit.framework in Frameworks */,
 				1A626AB719913F8100CE50F1 /* CoreGraphics.framework in Frameworks */,
 				1A626AB919913F8100CE50F1 /* UIKit.framework in Frameworks */,
 				1A626AB519913F8100CE50F1 /* Foundation.framework in Frameworks */,
@@ -96,6 +128,7 @@
 		1A626AB319913F8100CE50F1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1A7D6DD6199FB1330031E425 /* GameKit.framework */,
 				1A626AB419913F8100CE50F1 /* Foundation.framework */,
 				1A626AB619913F8100CE50F1 /* CoreGraphics.framework */,
 				1A626AB819913F8100CE50F1 /* UIKit.framework */,
@@ -107,9 +140,13 @@
 		1A626ABA19913F8100CE50F1 /* JS Pong */ = {
 			isa = PBXGroup;
 			children = (
+				1A7D6DDB199FB2370031E425 /* Network */,
+				1A626AF8199264D500CE50F1 /* Views */,
+				1A626AEF1992525700CE50F1 /* View Controllers */,
 				1A626AC319913F8100CE50F1 /* JSPongAppDelegate.h */,
 				1A626AC419913F8100CE50F1 /* JSPongAppDelegate.m */,
 				1A626AC619913F8100CE50F1 /* Images.xcassets */,
+				1A626AE7199141B300CE50F1 /* Resources */,
 				1A626ABB19913F8100CE50F1 /* Supporting Files */,
 			);
 			path = "JS Pong";
@@ -142,6 +179,68 @@
 				1A626AD619913F8100CE50F1 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1A626AE7199141B300CE50F1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1A626AF419925E3400CE50F1 /* pics */,
+				1A626AE8199141CA00CE50F1 /* storyboards */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		1A626AE8199141CA00CE50F1 /* storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				1A626AE5199141A700CE50F1 /* Main_iPad.storyboard */,
+				1A626AE31991412B00CE50F1 /* Main_iPhone.storyboard */,
+			);
+			name = storyboards;
+			sourceTree = "<group>";
+		};
+		1A626AEF1992525700CE50F1 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1A626AEC1992460000CE50F1 /* JSPongMenuViewController.h */,
+				1A626AED1992460000CE50F1 /* JSPongMenuViewController.m */,
+				1A626AE91992453D00CE50F1 /* JSPongPlayViewController.h */,
+				1A626AEA1992453D00CE50F1 /* JSPongPlayViewController.m */,
+				1A7D6DD0199FA46B0031E425 /* JSPongHostGameViewController.h */,
+				1A7D6DD1199FA46B0031E425 /* JSPongHostGameViewController.m */,
+				1A7D6DD3199FA4A70031E425 /* JSPongJoinGameViewController.h */,
+				1A7D6DD4199FA4A70031E425 /* JSPongJoinGameViewController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		1A626AF419925E3400CE50F1 /* pics */ = {
+			isa = PBXGroup;
+			children = (
+				1A626AF019925E3000CE50F1 /* bg.png */,
+				1A626AF119925E3000CE50F1 /* pad.png */,
+			);
+			name = pics;
+			sourceTree = "<group>";
+		};
+		1A626AF8199264D500CE50F1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1A626AF5199264C700CE50F1 /* JSPongPuck.h */,
+				1A626AF6199264C700CE50F1 /* JSPongPuck.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		1A7D6DDB199FB2370031E425 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				1A7D6DD8199FB22B0031E425 /* JSPongServer.h */,
+				1A7D6DD9199FB22B0031E425 /* JSPongServer.m */,
+				1AC3670C199FB83A00F491F5 /* JSPongClient.h */,
+				1AC3670D199FB83A00F491F5 /* JSPongClient.m */,
+			);
+			name = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,8 +319,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A626AF219925E3000CE50F1 /* bg.png in Resources */,
 				1A626ABF19913F8100CE50F1 /* InfoPlist.strings in Resources */,
+				1A626AE6199141A700CE50F1 /* Main_iPad.storyboard in Resources */,
+				1A626AF319925E3000CE50F1 /* pad.png in Resources */,
 				1A626AC719913F8100CE50F1 /* Images.xcassets in Resources */,
+				1A626AE41991412B00CE50F1 /* Main_iPhone.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,8 +343,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A626AEB1992453D00CE50F1 /* JSPongPlayViewController.m in Sources */,
 				1A626AC119913F8100CE50F1 /* main.m in Sources */,
+				1A7D6DD5199FA4A70031E425 /* JSPongJoinGameViewController.m in Sources */,
+				1A626AEE1992460000CE50F1 /* JSPongMenuViewController.m in Sources */,
+				1A7D6DDA199FB22B0031E425 /* JSPongServer.m in Sources */,
 				1A626AC519913F8100CE50F1 /* JSPongAppDelegate.m in Sources */,
+				1A626AF7199264C700CE50F1 /* JSPongPuck.m in Sources */,
+				1A7D6DD2199FA46B0031E425 /* JSPongHostGameViewController.m in Sources */,
+				1AC3670E199FB83A00F491F5 /* JSPongClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +473,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JS Pong/JS Pong-Prefix.pch";
 				INFOPLIST_FILE = "JS Pong/JS Pong-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -376,6 +487,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JS Pong/JS Pong-Prefix.pch";
 				INFOPLIST_FILE = "JS Pong/JS Pong-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -440,6 +552,7 @@
 				1A626ADF19913F8100CE50F1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1A626AE019913F8100CE50F1 /* Build configuration list for PBXNativeTarget "JS PongTests" */ = {
 			isa = XCConfigurationList;
@@ -448,6 +561,7 @@
 				1A626AE219913F8100CE50F1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

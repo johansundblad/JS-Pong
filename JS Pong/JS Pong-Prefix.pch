@@ -13,4 +13,8 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+    #import <GameKit/GameKit.h>
 #endif
+
+// The name of the GameKit session.
+#define SESSION_ID @"JS Pong"
