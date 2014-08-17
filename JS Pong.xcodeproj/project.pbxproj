@@ -31,6 +31,13 @@
 		1A7D6DD7199FB1330031E425 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A7D6DD6199FB1330031E425 /* GameKit.framework */; };
 		1A7D6DDA199FB22B0031E425 /* JSPongServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A7D6DD9199FB22B0031E425 /* JSPongServer.m */; };
 		1AC3670E199FB83A00F491F5 /* JSPongClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC3670D199FB83A00F491F5 /* JSPongClient.m */; };
+		1AC36712199FFE8F00F491F5 /* JSPongGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC36711199FFE8F00F491F5 /* JSPongGame.m */; };
+		1AC3671519A00AAE00F491F5 /* JSPongPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC3671419A00AAE00F491F5 /* JSPongPlayer.m */; };
+		1AC3671819A00DDC00F491F5 /* JSPongPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC3671719A00DDC00F491F5 /* JSPongPacket.m */; };
+		1AC3671B19A0124000F491F5 /* NSData+JSPongAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC3671A19A0124000F491F5 /* NSData+JSPongAdditions.m */; };
+		1AC89CA819A01A0A0046F4CB /* JSPongPacketSignInResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC89CA719A01A0A0046F4CB /* JSPongPacketSignInResponse.m */; };
+		1AC89CAB19A0A5440046F4CB /* JSPongPacketServerReady.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC89CAA19A0A5440046F4CB /* JSPongPacketServerReady.m */; };
+		1AC89CAE19A0BC2E0046F4CB /* JSPongPlayGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC89CAD19A0BC2E0046F4CB /* JSPongPlayGameViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +86,20 @@
 		1A7D6DD9199FB22B0031E425 /* JSPongServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSPongServer.m; sourceTree = "<group>"; };
 		1AC3670C199FB83A00F491F5 /* JSPongClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSPongClient.h; sourceTree = "<group>"; };
 		1AC3670D199FB83A00F491F5 /* JSPongClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSPongClient.m; sourceTree = "<group>"; };
+		1AC36710199FFE8F00F491F5 /* JSPongGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSPongGame.h; sourceTree = "<group>"; };
+		1AC36711199FFE8F00F491F5 /* JSPongGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSPongGame.m; sourceTree = "<group>"; };
+		1AC3671319A00AAE00F491F5 /* JSPongPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSPongPlayer.h; sourceTree = "<group>"; };
+		1AC3671419A00AAE00F491F5 /* JSPongPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSPongPlayer.m; sourceTree = "<group>"; };
+		1AC3671619A00DDC00F491F5 /* JSPongPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSPongPacket.h; sourceTree = "<group>"; };
+		1AC3671719A00DDC00F491F5 /* JSPongPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSPongPacket.m; sourceTree = "<group>"; };
+		1AC3671919A0124000F491F5 /* NSData+JSPongAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+JSPongAdditions.h"; sourceTree = "<group>"; };
+		1AC3671A19A0124000F491F5 /* NSData+JSPongAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+JSPongAdditions.m"; sourceTree = "<group>"; };
+		1AC89CA619A01A0A0046F4CB /* JSPongPacketSignInResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSPongPacketSignInResponse.h; sourceTree = "<group>"; };
+		1AC89CA719A01A0A0046F4CB /* JSPongPacketSignInResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSPongPacketSignInResponse.m; sourceTree = "<group>"; };
+		1AC89CA919A0A5440046F4CB /* JSPongPacketServerReady.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSPongPacketServerReady.h; sourceTree = "<group>"; };
+		1AC89CAA19A0A5440046F4CB /* JSPongPacketServerReady.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSPongPacketServerReady.m; sourceTree = "<group>"; };
+		1AC89CAC19A0BC2E0046F4CB /* JSPongPlayGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSPongPlayGameViewController.h; sourceTree = "<group>"; };
+		1AC89CAD19A0BC2E0046F4CB /* JSPongPlayGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSPongPlayGameViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,14 +161,17 @@
 		1A626ABA19913F8100CE50F1 /* JS Pong */ = {
 			isa = PBXGroup;
 			children = (
-				1A7D6DDB199FB2370031E425 /* Network */,
+				1AC3670F199FFE5700F491F5 /* Models */,
 				1A626AF8199264D500CE50F1 /* Views */,
 				1A626AEF1992525700CE50F1 /* View Controllers */,
+				1A7D6DDB199FB2370031E425 /* Network */,
 				1A626AC319913F8100CE50F1 /* JSPongAppDelegate.h */,
 				1A626AC419913F8100CE50F1 /* JSPongAppDelegate.m */,
 				1A626AC619913F8100CE50F1 /* Images.xcassets */,
 				1A626AE7199141B300CE50F1 /* Resources */,
 				1A626ABB19913F8100CE50F1 /* Supporting Files */,
+				1AC3671919A0124000F491F5 /* NSData+JSPongAdditions.h */,
+				1AC3671A19A0124000F491F5 /* NSData+JSPongAdditions.m */,
 			);
 			path = "JS Pong";
 			sourceTree = "<group>";
@@ -210,6 +234,8 @@
 				1A7D6DD1199FA46B0031E425 /* JSPongHostGameViewController.m */,
 				1A7D6DD3199FA4A70031E425 /* JSPongJoinGameViewController.h */,
 				1A7D6DD4199FA4A70031E425 /* JSPongJoinGameViewController.m */,
+				1AC89CAC19A0BC2E0046F4CB /* JSPongPlayGameViewController.h */,
+				1AC89CAD19A0BC2E0046F4CB /* JSPongPlayGameViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -235,12 +261,29 @@
 		1A7D6DDB199FB2370031E425 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				1A7D6DD8199FB22B0031E425 /* JSPongServer.h */,
-				1A7D6DD9199FB22B0031E425 /* JSPongServer.m */,
 				1AC3670C199FB83A00F491F5 /* JSPongClient.h */,
 				1AC3670D199FB83A00F491F5 /* JSPongClient.m */,
+				1A7D6DD8199FB22B0031E425 /* JSPongServer.h */,
+				1A7D6DD9199FB22B0031E425 /* JSPongServer.m */,
+				1AC3671619A00DDC00F491F5 /* JSPongPacket.h */,
+				1AC3671719A00DDC00F491F5 /* JSPongPacket.m */,
+				1AC89CA619A01A0A0046F4CB /* JSPongPacketSignInResponse.h */,
+				1AC89CA719A01A0A0046F4CB /* JSPongPacketSignInResponse.m */,
+				1AC89CA919A0A5440046F4CB /* JSPongPacketServerReady.h */,
+				1AC89CAA19A0A5440046F4CB /* JSPongPacketServerReady.m */,
 			);
 			name = Network;
+			sourceTree = "<group>";
+		};
+		1AC3670F199FFE5700F491F5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1AC36710199FFE8F00F491F5 /* JSPongGame.h */,
+				1AC36711199FFE8F00F491F5 /* JSPongGame.m */,
+				1AC3671319A00AAE00F491F5 /* JSPongPlayer.h */,
+				1AC3671419A00AAE00F491F5 /* JSPongPlayer.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -345,13 +388,20 @@
 			files = (
 				1A626AEB1992453D00CE50F1 /* JSPongPlayViewController.m in Sources */,
 				1A626AC119913F8100CE50F1 /* main.m in Sources */,
+				1AC36712199FFE8F00F491F5 /* JSPongGame.m in Sources */,
 				1A7D6DD5199FA4A70031E425 /* JSPongJoinGameViewController.m in Sources */,
 				1A626AEE1992460000CE50F1 /* JSPongMenuViewController.m in Sources */,
 				1A7D6DDA199FB22B0031E425 /* JSPongServer.m in Sources */,
+				1AC3671819A00DDC00F491F5 /* JSPongPacket.m in Sources */,
+				1AC3671519A00AAE00F491F5 /* JSPongPlayer.m in Sources */,
 				1A626AC519913F8100CE50F1 /* JSPongAppDelegate.m in Sources */,
+				1AC89CAE19A0BC2E0046F4CB /* JSPongPlayGameViewController.m in Sources */,
+				1AC3671B19A0124000F491F5 /* NSData+JSPongAdditions.m in Sources */,
 				1A626AF7199264C700CE50F1 /* JSPongPuck.m in Sources */,
 				1A7D6DD2199FA46B0031E425 /* JSPongHostGameViewController.m in Sources */,
 				1AC3670E199FB83A00F491F5 /* JSPongClient.m in Sources */,
+				1AC89CA819A01A0A0046F4CB /* JSPongPacketSignInResponse.m in Sources */,
+				1AC89CAB19A0A5440046F4CB /* JSPongPacketServerReady.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,7 +475,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -458,7 +508,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

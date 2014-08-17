@@ -55,6 +55,23 @@ ClientState;
 	[_session connectToPeer:peerID withTimeout:_session.disconnectTimeout];
 }
 
+- (void)disconnectFromServer
+{
+	NSAssert(_clientState != ClientStateIdle, @"Wrong state");
+    
+	_clientState = ClientStateIdle;
+    
+	[_session disconnectFromAllPeers];
+	_session.available = NO;
+	_session.delegate = nil;
+	_session = nil;
+    
+	_availableServers = nil;
+    
+	[self.delegate pongClient:self didDisconnectFromServer:_serverPeerID];
+	_serverPeerID = nil;
+}
+
 - (NSArray *)availableServers
 {
 	return _availableServers;
@@ -109,24 +126,28 @@ ClientState;
 			}
 			break;
             
+            // You're now connected to the server.
 		case GKPeerStateConnected:
+			if (_clientState == ClientStateConnecting)
+			{
+				_clientState = ClientStateConnected;
+				[self.delegate pongClient:self didConnectToServer:peerID];
+			}
 			break;
             
+            // You're now no longer connected to the server.
 		case GKPeerStateDisconnected:
+			if (_clientState == ClientStateConnected)
+			{
+				[self disconnectFromServer];
+			}
 			break;
             
 		case GKPeerStateConnecting:
 			break;
 	}	
 }
-/*
-- (void)session:(GKSession *)session peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state
-{
-#ifdef DEBUG
-	NSLog(@"JSPongClient: peer %@ changed state %d", peerID, state);
-#endif
-}
-*/
+
 - (void)session:(GKSession *)session didReceiveConnectionRequestFromPeer:(NSString *)peerID
 {
 #ifdef DEBUG
@@ -137,8 +158,10 @@ ClientState;
 - (void)session:(GKSession *)session connectionWithPeerFailed:(NSString *)peerID withError:(NSError *)error
 {
 #ifdef DEBUG
-	NSLog(@"JSPongClient: connection with peer %@ failed %@", peerID, error);
+	NSLog(@"MatchmakingClient: connection with peer %@ failed %@", peerID, error);
 #endif
+    
+	[self disconnectFromServer];
 }
 
 - (void)session:(GKSession *)session didFailWithError:(NSError *)error

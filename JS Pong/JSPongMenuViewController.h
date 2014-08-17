@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JSPongHostGameViewController.h"
+#import "JSPongJoinGameViewController.h"
+#import "JSPongPlayGameViewController.h"
 
-@interface JSPongMenuViewController : UIViewController
+@interface JSPongMenuViewController : UIViewController <JSPongHostGameViewControllerDelegate, JSPongJoinGameViewControllerDelegate, JSPongPlayGameViewControllerDelegate>
 
 @end

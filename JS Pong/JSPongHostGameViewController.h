@@ -9,6 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "JSPongServer.h"
 
-@interface JSPongHostGameViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+@class JSPongHostGameViewController;
+
+@protocol JSPongHostGameViewControllerDelegate <NSObject>
+
+- (void)hostViewControllerDidCancel:(JSPongHostGameViewController *)controller;
+- (void)hostViewController:(JSPongHostGameViewController *)controller didEndSessionWithReason:(QuitReason)reason;
+- (void)hostViewController:(JSPongHostGameViewController *)controller startGameWithSession:(GKSession *)session playerName:(NSString *)name clients:(NSArray *)clients;
+
+@end
+
+@interface JSPongHostGameViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, JSPongServerDelegate>
+
+@property (nonatomic, weak) id <JSPongHostGameViewControllerDelegate> delegate;
 
 @end

@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JSPongGame.h"
 #import "JSPongPuck.h"
 
 int myGoalsNum;
 int opponentGoalsNum;
 
-@interface JSPongPlayViewController : UIViewController
+@interface JSPongPlayViewController : UIViewController <JSPongGameDelegate>
 {
     IBOutlet UIImageView *myPad;
     IBOutlet UIImageView *opponentPad;

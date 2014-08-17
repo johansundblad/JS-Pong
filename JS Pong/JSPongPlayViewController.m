@@ -131,4 +131,16 @@
     [self faceOff];
 }
 
+#pragma mark - JSPongGameDelegate
+
+- (void)gameWaitingForServerReady:(JSPongGame *)game
+{
+	// self.centerLabel.text = NSLocalizedString(@"Waiting for game to start...", @"Status text: waiting for server");
+}
+
+- (void)gameWaitingForClientsReady:(JSPongGame *)game
+{
+	// self.centerLabel.text = NSLocalizedString(@"Waiting for other players...", @"Status text: waiting for clients");
+}
+
 @end

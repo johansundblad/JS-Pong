@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--View Controller - PONG-->
+        <!--Pong Menu View Controller - PONG-->
         <scene sceneID="43z-Iv-sxT">
             <objects>
-                <viewController id="FOO-vu-sp5" sceneMemberID="viewController">
+                <viewController id="FOO-vu-sp5" customClass="JSPongMenuViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GEP-UD-hNg"/>
                         <viewControllerLayoutGuide type="bottom" id="yfi-0h-xFh"/>
@@ -29,7 +29,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Start"/>
                                 <connections>
-                                    <segue destination="bR1-V5-ccG" kind="modal" id="OGD-Ze-bJa"/>
+                                    <segue destination="bR1-V5-ccG" kind="modal" identifier="SingleGame" id="OGD-Ze-bJa"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s20-0q-8O9">
@@ -37,7 +37,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Host game"/>
                                 <connections>
-                                    <segue destination="pwS-D7-2Jc" kind="push" id="pvf-GP-KeT"/>
+                                    <segue destination="pwS-D7-2Jc" kind="push" identifier="HostGame" id="pvf-GP-KeT"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ca-lA-zey">
@@ -45,7 +45,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Join game"/>
                                 <connections>
-                                    <segue destination="oEs-pW-65I" kind="push" id="nSC-vc-xZN"/>
+                                    <segue destination="oEs-pW-65I" kind="push" identifier="JoinGame" id="nSC-vc-xZN"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dual player" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HLV-hO-FCU">
@@ -68,15 +68,20 @@
                     </view>
                     <navigationItem key="navigationItem" title="PONG" id="ZhI-F7-bLz"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <outlet property="hostGameButton" destination="s20-0q-8O9" id="QhY-kv-Oj7"/>
+                        <outlet property="joinGameButton" destination="1Ca-lA-zey" id="uOX-hb-1V4"/>
+                        <outlet property="singlePlayerGameButton" destination="r09-14-5nI" id="NUM-F3-pci"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bxP-fE-hPG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="691" y="-175"/>
         </scene>
-        <!--Pong Play View Controller - PLAY-->
+        <!--Pong Play Game View Controller - PLAY-->
         <scene sceneID="bMP-ab-Tzo">
             <objects>
-                <viewController id="bR1-V5-ccG" customClass="JSPongPlayViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="JSPongPlayGameViewController" id="bR1-V5-ccG" customClass="JSPongPlayGameViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="chP-eM-A3p"/>
                         <viewControllerLayoutGuide type="bottom" id="JgI-Qt-Faa"/>
@@ -125,6 +130,23 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fMN-4L-Bor">
+                                <rect key="frame" x="505" y="275" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Exit">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="exitAction:" destination="bR1-V5-ccG" eventType="touchUpInside" id="kwS-RO-LnG"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n40-Mb-8N6">
+                                <rect key="frame" x="20" y="275" width="419" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -132,6 +154,7 @@
                     <navigationItem key="navigationItem" title="PLAY" id="4Ib-NP-Eyk"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
+                        <outlet property="infoLabel" destination="n40-Mb-8N6" id="TDq-kI-Lq3"/>
                         <outlet property="moveSlider" destination="l4a-XQ-jiq" id="yQK-qt-GH0"/>
                         <outlet property="myGoals" destination="qan-Sh-fLV" id="jFM-y6-gyM"/>
                         <outlet property="myPad" destination="7le-tX-0Up" id="9LG-pp-hlJ"/>
@@ -211,6 +234,9 @@
                                 <state key="normal" title="Start">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="startAction:" destination="pwS-D7-2Jc" eventType="touchUpInside" id="K0n-Vb-drs"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

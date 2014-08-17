@@ -12,16 +12,15 @@
 @property (nonatomic, weak) IBOutlet UILabel *headingLabel;
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 @property (nonatomic, weak) IBOutlet UITextField *nameTextField;
-@property (nonatomic, weak) IBOutlet UILabel *statusLabel;
+//@property (nonatomic, weak) IBOutlet UILabel *statusLabel;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
-@property (nonatomic, strong) IBOutlet UIView *waitView;
-@property (nonatomic, weak) IBOutlet UILabel *waitLabel;
 @end
 
 @implementation JSPongJoinGameViewController
 {
 	JSPongClient *_pongClient;
+    QuitReason _quitReason;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -49,6 +48,8 @@
     
 	if (_pongClient == nil)
 	{
+        _quitReason = QuitReasonConnectionDropped;
+        
 		_pongClient = [[JSPongClient alloc] init];
         _pongClient.delegate = self;
 		[_pongClient startSearchingForServersWithSessionID:SESSION_ID];
@@ -56,6 +57,13 @@
 		self.nameTextField.placeholder = _pongClient.session.displayName;
 		[self.tableView reloadData];
 	}
+}
+
+- (IBAction)exitAction:(id)sender
+{
+	_quitReason = QuitReasonUserQuit;
+	[_pongClient disconnectFromServer];
+	[self.delegate joinViewControllerDidCancel:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -116,13 +124,19 @@
 	if (_pongClient != nil)
 	{
 		// TODO: [self.view addSubview:self.waitView];
+        /*
+        self.headingLabel.text = @"Connecting...";
+        self.nameLabel.hidden = true;
+        self.nameTextField.hidden = true;
+        self.tableView.hidden = true;
+         */
         
 		NSString *peerID = [_pongClient peerIDForAvailableServerAtIndex:indexPath.row];
 		[_pongClient connectToServerWithPeerID:peerID];
 	}
 }
 
-#pragma mark - PongClientDelegate
+#pragma mark - JSPongClientDelegate
 
 - (void)pongClient:(JSPongClient *)client serverBecameAvailable:(NSString *)peerID
 {
@@ -134,4 +148,23 @@
 	[self.tableView reloadData];
 }
 
+- (void)pongClient:(JSPongClient *)client didDisconnectFromServer:(NSString *)peerID
+{
+	_pongClient.delegate = nil;
+	_pongClient = nil;
+	[self.tableView reloadData];
+	[self.delegate joinViewController:self didDisconnectWithReason:_quitReason];
+}
+- (void)pongClient:(JSPongClient *)client didConnectToServer:(NSString *)peerID
+{
+	NSString *name = [self.nameTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	if ([name length] == 0)
+		name = _pongClient.session.displayName;
+    
+	[self.delegate joinViewController:self startGameWithSession:_pongClient.session playerName:name server:peerID];
+}
+- (void)pongClient:(JSPongClient *)client
+{
+	_quitReason = QuitReasonNoNetwork;
+}
 @end

@@ -14,6 +14,8 @@
 
 - (void)pongClient:(JSPongClient *)client serverBecameAvailable:(NSString *)peerID;
 - (void)pongClient:(JSPongClient *)client serverBecameUnavailable:(NSString *)peerID;
+- (void)pongClient:(JSPongClient *)client didDisconnectFromServer:(NSString *)peerID;
+- (void)pongClient:(JSPongClient *)client didConnectToServer:(NSString *)peerID;
 
 @end
 
@@ -30,5 +32,6 @@
 
 - (void)startSearchingForServersWithSessionID:(NSString *)sessionID;
 - (void)connectToServerWithPeerID:(NSString *)peerID;
+- (void)disconnectFromServer;
 
 @end

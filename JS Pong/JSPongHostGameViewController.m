@@ -12,7 +12,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *headingLabel;
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 @property (nonatomic, weak) IBOutlet UITextField *nameTextField;
-@property (nonatomic, weak) IBOutlet UILabel *statusLabel;
+//@property (nonatomic, weak) IBOutlet UILabel *statusLabel;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UIButton *startButton;
 @end
@@ -48,7 +48,8 @@
 	if (_pongServer == nil)
 	{
 		_pongServer = [[JSPongServer alloc] init];
-		_pongServer.maxClients = 3;
+        _pongServer.delegate = self;
+		_pongServer.maxClients = 1;
 		[_pongServer startAcceptingConnectionsForSessionID:SESSION_ID];
         
 		self.nameTextField.placeholder = _pongServer.session.displayName;
@@ -75,6 +76,16 @@
 
 - (IBAction)startAction:(id)sender
 {
+	if (_pongServer != nil && [_pongServer connectedClientCount] > 0)
+	{
+		NSString *name = [self.nameTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+		if ([name length] == 0)
+			name = _pongServer.session.displayName;
+        
+		[_pongServer stopAcceptingConnections];
+        
+		[self.delegate hostViewController:self startGameWithSession:_pongServer.session playerName:name clients:_pongServer.connectedClients];
+	}
 }
 
 - (IBAction)exitAction:(id)sender
@@ -85,10 +96,33 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return 0;
+	if (_pongServer != nil)
+		return [_pongServer connectedClientCount];
+	else
+		return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	static NSString *CellIdentifier = @"CellIdentifier";
+    
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	
+    if (cell == nil)
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        /* TODO
+		cell = [[PeerCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+     */
+    
+	NSString *peerID = [_pongServer peerIDForConnectedClientAtIndex:indexPath.row];
+	cell.textLabel.text = [_pongServer displayNameForPeerID:peerID];
+    
+	return cell;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	return nil;
 }
@@ -99,6 +133,18 @@
 {
 	[textField resignFirstResponder];
 	return NO;
+}
+
+#pragma mark - jSPongServerDelegate
+
+- (void)pongServer:(JSPongServer *)server clientDidConnect:(NSString *)peerID
+{
+	[self.tableView reloadData];
+}
+
+- (void)pongServer:(JSPongServer *)server clientDidDisconnect:(NSString *)peerID
+{
+	[self.tableView reloadData];
 }
 
 @end

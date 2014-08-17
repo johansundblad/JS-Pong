@@ -36,7 +36,6 @@ ServerState;
 	if (_serverState == ServerStateIdle)
 	{
 		_serverState = ServerStateAcceptingConnections;
-        
 		_connectedClients = [NSMutableArray arrayWithCapacity:self.maxClients];
         
         _session = [[GKSession alloc] initWithSessionID:sessionID displayName:nil sessionMode:GKSessionModeServer];
@@ -45,9 +44,32 @@ ServerState;
 	}
 }
 
+- (void)stopAcceptingConnections
+{
+	NSAssert(_serverState == ServerStateAcceptingConnections, @"Wrong state");
+    
+	_serverState = ServerStateIgnoringNewConnections;
+	_session.available = NO;
+}
+
 - (NSArray *)connectedClients
 {
 	return _connectedClients;
+}
+
+- (NSUInteger)connectedClientCount
+{
+	return [_connectedClients count];
+}
+
+- (NSString *)peerIDForConnectedClientAtIndex:(NSUInteger)index
+{
+	return [_connectedClients objectAtIndex:index];
+}
+
+- (NSString *)displayNameForPeerID:(NSString *)peerID
+{
+	return [_session displayNameForPeer:peerID];
 }
 
 #pragma mark - GKSessionDelegate
@@ -57,6 +79,41 @@ ServerState;
 #ifdef DEBUG
 	NSLog(@"JSPongServer: peer %@ changed state %d", peerID, state);
 #endif
+    switch (state)
+	{
+		case GKPeerStateAvailable:
+			break;
+            
+		case GKPeerStateUnavailable:
+			break;
+            
+            // A new client has connected to the server.
+		case GKPeerStateConnected:
+			if (_serverState == ServerStateAcceptingConnections)
+			{
+				if (![_connectedClients containsObject:peerID])
+				{
+					[_connectedClients addObject:peerID];
+					[self.delegate pongServer:self clientDidConnect:peerID];
+				}
+			}
+			break;
+            
+            // A client has disconnected from the server.
+		case GKPeerStateDisconnected:
+			if (_serverState != ServerStateIdle)
+			{
+				if ([_connectedClients containsObject:peerID])
+				{
+					[_connectedClients removeObject:peerID];
+					[self.delegate pongServer:self clientDidDisconnect:peerID];
+				}
+			}
+			break;
+            
+		case GKPeerStateConnecting:
+			break;
+	}
 }
 
 - (void)session:(GKSession *)session didReceiveConnectionRequestFromPeer:(NSString *)peerID
@@ -64,6 +121,19 @@ ServerState;
 #ifdef DEBUG
 	NSLog(@"JSPongServer: connection request from peer %@", peerID);
 #endif
+    
+    if (_serverState == ServerStateAcceptingConnections && [self connectedClientCount] < self.maxClients)
+	{
+		NSError *error;
+		if ([session acceptConnectionFromPeer:peerID error:&error])
+			NSLog(@"JSPongServer: Connection accepted from peer %@", peerID);
+		else
+			NSLog(@"JSPongServer: Error accepting connection from peer %@, %@", peerID, error);
+	}
+	else  // not accepting connections or too many clients
+	{
+		[session denyConnectionFromPeer:peerID];
+	}
 }
 
 - (void)session:(GKSession *)session connectionWithPeerFailed:(NSString *)peerID withError:(NSError *)error
