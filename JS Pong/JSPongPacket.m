@@ -9,6 +9,7 @@
 #import "JSPongPacket.h"
 #import "JSPongPacketSignInResponse.h"
 #import "JSPongPacketServerReady.h"
+#import "JSPongPacketOtherClientQuit.h"
 #import "NSData+JSPongAdditions.h"
 
 const size_t PACKET_HEADER_SIZE = 10;
@@ -30,7 +31,7 @@ const size_t PACKET_HEADER_SIZE = 10;
 		return nil;
 	}
     
-	if ([data rw_int32AtOffset:0] != 'SNAP')
+	if ([data rw_int32AtOffset:0] != 'PONG')
 	{
 		NSLog(@"Error: Packet has invalid header");
 		return nil;
@@ -45,6 +46,8 @@ const size_t PACKET_HEADER_SIZE = 10;
 	{
 		case PacketTypeSignInRequest:
         case PacketTypeClientReady:
+        case PacketTypeServerQuit:
+		case PacketTypeClientQuit:
 			packet = [JSPongPacket packetWithType:packetType];
 			break;
             
@@ -54,6 +57,10 @@ const size_t PACKET_HEADER_SIZE = 10;
             
         case PacketTypeServerReady:
 			packet = [JSPongPacketServerReady packetWithData:data];
+			break;
+            
+        case PacketTypeOtherClientQuit:
+			packet = [JSPongPacketOtherClientQuit packetWithData:data];
 			break;
             
 		default:

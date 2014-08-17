@@ -21,7 +21,6 @@
 		1A626ADA19913F8100CE50F1 /* JS_PongTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A626AD919913F8100CE50F1 /* JS_PongTests.m */; };
 		1A626AE41991412B00CE50F1 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A626AE31991412B00CE50F1 /* Main_iPhone.storyboard */; };
 		1A626AE6199141A700CE50F1 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A626AE5199141A700CE50F1 /* Main_iPad.storyboard */; };
-		1A626AEB1992453D00CE50F1 /* JSPongPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A626AEA1992453D00CE50F1 /* JSPongPlayViewController.m */; };
 		1A626AEE1992460000CE50F1 /* JSPongMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A626AED1992460000CE50F1 /* JSPongMenuViewController.m */; };
 		1A626AF219925E3000CE50F1 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A626AF019925E3000CE50F1 /* bg.png */; };
 		1A626AF319925E3000CE50F1 /* pad.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A626AF119925E3000CE50F1 /* pad.png */; };
@@ -38,6 +37,7 @@
 		1AC89CA819A01A0A0046F4CB /* JSPongPacketSignInResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC89CA719A01A0A0046F4CB /* JSPongPacketSignInResponse.m */; };
 		1AC89CAB19A0A5440046F4CB /* JSPongPacketServerReady.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC89CAA19A0A5440046F4CB /* JSPongPacketServerReady.m */; };
 		1AC89CAE19A0BC2E0046F4CB /* JSPongPlayGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC89CAD19A0BC2E0046F4CB /* JSPongPlayGameViewController.m */; };
+		1AC89CB119A152E60046F4CB /* JSPongPacketOtherClientQuit.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC89CB019A152E60046F4CB /* JSPongPacketOtherClientQuit.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,8 +69,6 @@
 		1A626AD919913F8100CE50F1 /* JS_PongTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JS_PongTests.m; sourceTree = "<group>"; };
 		1A626AE31991412B00CE50F1 /* Main_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPhone.storyboard; sourceTree = "<group>"; };
 		1A626AE5199141A700CE50F1 /* Main_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main_iPad.storyboard; path = ../Main_iPad.storyboard; sourceTree = "<group>"; };
-		1A626AE91992453D00CE50F1 /* JSPongPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSPongPlayViewController.h; sourceTree = "<group>"; };
-		1A626AEA1992453D00CE50F1 /* JSPongPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSPongPlayViewController.m; sourceTree = "<group>"; };
 		1A626AEC1992460000CE50F1 /* JSPongMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSPongMenuViewController.h; sourceTree = "<group>"; };
 		1A626AED1992460000CE50F1 /* JSPongMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSPongMenuViewController.m; sourceTree = "<group>"; };
 		1A626AF019925E3000CE50F1 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
@@ -100,6 +98,8 @@
 		1AC89CAA19A0A5440046F4CB /* JSPongPacketServerReady.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSPongPacketServerReady.m; sourceTree = "<group>"; };
 		1AC89CAC19A0BC2E0046F4CB /* JSPongPlayGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSPongPlayGameViewController.h; sourceTree = "<group>"; };
 		1AC89CAD19A0BC2E0046F4CB /* JSPongPlayGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSPongPlayGameViewController.m; sourceTree = "<group>"; };
+		1AC89CAF19A152E60046F4CB /* JSPongPacketOtherClientQuit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSPongPacketOtherClientQuit.h; sourceTree = "<group>"; };
+		1AC89CB019A152E60046F4CB /* JSPongPacketOtherClientQuit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSPongPacketOtherClientQuit.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,8 +228,6 @@
 			children = (
 				1A626AEC1992460000CE50F1 /* JSPongMenuViewController.h */,
 				1A626AED1992460000CE50F1 /* JSPongMenuViewController.m */,
-				1A626AE91992453D00CE50F1 /* JSPongPlayViewController.h */,
-				1A626AEA1992453D00CE50F1 /* JSPongPlayViewController.m */,
 				1A7D6DD0199FA46B0031E425 /* JSPongHostGameViewController.h */,
 				1A7D6DD1199FA46B0031E425 /* JSPongHostGameViewController.m */,
 				1A7D6DD3199FA4A70031E425 /* JSPongJoinGameViewController.h */,
@@ -271,6 +269,8 @@
 				1AC89CA719A01A0A0046F4CB /* JSPongPacketSignInResponse.m */,
 				1AC89CA919A0A5440046F4CB /* JSPongPacketServerReady.h */,
 				1AC89CAA19A0A5440046F4CB /* JSPongPacketServerReady.m */,
+				1AC89CAF19A152E60046F4CB /* JSPongPacketOtherClientQuit.h */,
+				1AC89CB019A152E60046F4CB /* JSPongPacketOtherClientQuit.m */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -386,12 +386,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A626AEB1992453D00CE50F1 /* JSPongPlayViewController.m in Sources */,
 				1A626AC119913F8100CE50F1 /* main.m in Sources */,
 				1AC36712199FFE8F00F491F5 /* JSPongGame.m in Sources */,
 				1A7D6DD5199FA4A70031E425 /* JSPongJoinGameViewController.m in Sources */,
 				1A626AEE1992460000CE50F1 /* JSPongMenuViewController.m in Sources */,
 				1A7D6DDA199FB22B0031E425 /* JSPongServer.m in Sources */,
+				1AC89CB119A152E60046F4CB /* JSPongPacketOtherClientQuit.m in Sources */,
 				1AC3671819A00DDC00F491F5 /* JSPongPacket.m in Sources */,
 				1AC3671519A00AAE00F491F5 /* JSPongPlayer.m in Sources */,
 				1A626AC519913F8100CE50F1 /* JSPongAppDelegate.m in Sources */,

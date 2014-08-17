@@ -10,12 +10,13 @@
 #import "JSPongPacket.h"
 #import "JSPongPacketSignInResponse.h"
 #import "JSPongPacketServerReady.h"
+#import "JSPongPacketOtherClientQuit.h"
 
 typedef enum
 {
 	GameStateWaitingForSignIn,
 	GameStateWaitingForReady,
-	GameStateDealing,
+	GameStateFaceOff,
 	GameStatePlaying,
 	GameStateGameOver,
 	GameStateQuitting,
@@ -116,8 +117,8 @@ GameState;
 
 - (void)beginGame
 {
-	_state = GameStateDealing;
-	NSLog(@"the game should begin");
+	_state = GameStateFaceOff;
+	[self.delegate gameDidBegin:self];
 }
 
 - (void)changeRelativePositionsOfPlayers
@@ -139,6 +140,13 @@ GameState;
      */
 }
 
+/*
+- (void)playerMovedPadToPosition:(CGRect *)position
+{
+    NSLog(@"playerMovedPadToPosition x = %i y = %i", position.frame.x, position.y);
+}
+ */
+
 - (BOOL)isSinglePlayerGame
 {
 	return (_session == nil);
@@ -146,8 +154,6 @@ GameState;
 
 - (void)quitGameWithReason:(QuitReason)reason
 {
-	[NSObject cancelPreviousPerformRequestsWithTarget:self];
-    
 	_state = GameStateQuitting;
     
 	if (reason == QuitReasonUserQuit && ![self isSinglePlayerGame])
@@ -178,6 +184,18 @@ GameState;
 #ifdef DEBUG
 	NSLog(@"Game: peer %@ changed state %d", peerID, state);
 #endif
+    
+    if (state == GKPeerStateDisconnected)
+	{
+		if (self.isServer)
+		{
+			[self clientDidDisconnect:peerID];
+		}
+        else if ([peerID isEqualToString:_serverPeerID])
+		{
+			[self quitGameWithReason:QuitReasonConnectionDropped];
+		}
+	}
 }
 
 - (void)session:(GKSession *)session didReceiveConnectionRequestFromPeer:(NSString *)peerID
@@ -203,6 +221,14 @@ GameState;
 #ifdef DEBUG
 	NSLog(@"Game: session failed %@", error);
 #endif
+    
+    if ([[error domain] isEqualToString:GKSessionErrorDomain])
+	{
+		if (_state != GameStateQuitting)
+		{
+			[self quitGameWithReason:QuitReasonConnectionDropped];
+		}
+	}
 }
 
 #pragma mark - GKSession Data Receive Handler
@@ -223,7 +249,7 @@ GameState;
 	JSPongPlayer *player = [self playerWithPeerID:peerID];
     if (player != nil)
 	{
-		player.receivedResponse = YES;  // this is the new bit
+		player.receivedResponse = YES;
 	}
     
 	if (self.isServer)
@@ -245,8 +271,10 @@ GameState;
 				{
 					_state = GameStateWaitingForReady;
                     
-					NSLog(@"all clients have signed in");
-				}			}
+					JSPongPacket *packet = [JSPongPacketServerReady packetWithPlayers:_players];
+					[self sendPacketToAllClients:packet];
+				}
+            }
 			break;
             
         case PacketTypeClientReady:
@@ -256,8 +284,57 @@ GameState;
 			}
 			break;
             
+        case PacketTypeClientQuit:
+			[self clientDidDisconnect:player.peerID];
+			break;
+            
 		default:
 			NSLog(@"Server received unexpected packet: %@", packet);
+			break;
+	}
+}
+
+- (void)clientReceivedPacket:(JSPongPacket *)packet
+{
+	switch (packet.packetType)
+	{
+		case PacketTypeSignInRequest:
+			if (_state == GameStateWaitingForSignIn)
+			{
+				_state = GameStateWaitingForReady;
+                
+				JSPongPacket *packet = [JSPongPacketSignInResponse packetWithPlayerName:_localPlayerName];
+				[self sendPacketToServer:packet];
+			}
+			break;
+            
+        case PacketTypeServerReady:
+            if (_state == GameStateWaitingForReady)
+			{
+				_players = ((JSPongPacketServerReady *)packet).players;
+				[self changeRelativePositionsOfPlayers];
+                
+				JSPongPacket *packet = [JSPongPacket packetWithType:PacketTypeClientReady];
+				[self sendPacketToServer:packet];
+                
+				[self beginGame];
+			}
+			break;
+            
+        case PacketTypeOtherClientQuit:
+			if (_state != GameStateQuitting)
+			{
+				JSPongPacketOtherClientQuit *quitPacket = ((JSPongPacketOtherClientQuit *)packet);
+				[self clientDidDisconnect:quitPacket.peerID];
+			}
+			break;
+            
+        case PacketTypeServerQuit:
+			[self quitGameWithReason:QuitReasonServerQuit];
+			break;
+            
+		default:
+			NSLog(@"Client received unexpected packet: %@", packet);
 			break;
 	}
 }
@@ -291,37 +368,26 @@ GameState;
 	}
 }
 
-
-- (void)clientReceivedPacket:(JSPongPacket *)packet
+- (void)clientDidDisconnect:(NSString *)peerID
 {
-	switch (packet.packetType)
+	if (_state != GameStateQuitting)
 	{
-		case PacketTypeSignInRequest:
-			if (_state == GameStateWaitingForSignIn)
+		JSPongPlayer *player = [self playerWithPeerID:peerID];
+		if (player != nil)
+		{
+			[_players removeObjectForKey:peerID];
+            if (_state != GameStateWaitingForSignIn)
 			{
-				_state = GameStateWaitingForReady;
+				// Tell the other clients that this one is now disconnected.
+				if (self.isServer)
+				{
+					JSPongPacketOtherClientQuit *packet = [JSPongPacketOtherClientQuit packetWithPeerID:peerID];
+					[self sendPacketToAllClients:packet];
+				}
                 
-				JSPongPacket *packet = [JSPongPacketSignInResponse packetWithPlayerName:_localPlayerName];
-				[self sendPacketToServer:packet];
+				[self.delegate game:self playerDidDisconnect:player];
 			}
-			break;
-            
-        case PacketTypeServerReady:
-            if (_state == GameStateWaitingForReady)
-			{
-				_players = ((JSPongPacketServerReady *)packet).players;
-				[self changeRelativePositionsOfPlayers];
-                
-				JSPongPacket *packet = [JSPongPacket packetWithType:PacketTypeClientReady];
-				[self sendPacketToServer:packet];
-                
-				[self beginGame];
-			}
-			break;
-            
-		default:
-			NSLog(@"Client received unexpected packet: %@", packet);
-			break;
+		}
 	}
 }
 

@@ -56,6 +56,13 @@
     //[self faceOff];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
+    
+	[_alertView dismissWithClickedButtonIndex:_alertView.cancelButtonIndex animated:NO];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -92,8 +99,9 @@
 
 - (IBAction)moveSliderMoves:(UISlider *)sender {
     float theValue = sender.value;
-    
     NSLog(@"move = %f", theValue);
+    
+//    [self.game playerMovedPadToPosition: CGRectMake( _myPad.frame.origin.x, (300 * theValue), _myPad.frame.size.width, _myPad.frame.size.height)];
     
     [_myPad setFrame:CGRectMake( _myPad.frame.origin.x, (300 * theValue), _myPad.frame.size.width, _myPad.frame.size.height)];
 }
@@ -174,9 +182,23 @@
     self.infoLabel.text = NSLocalizedString(@"Waiting for other players...", @"Status text: waiting for clients");
 }
 
+- (void)gameDidBegin:(JSPongGame *)game
+{
+    [self faceOff];
+}
+
 - (void)game:(JSPongGame *)game didQuitWithReason:(QuitReason)reason
 {
     [self.delegate gameViewController:self didQuitWithReason:reason];
+}
+
+- (void)game:(JSPongGame *)game playerDidDisconnect:(JSPongPlayer *)disconnectedPlayer
+{
+    /*
+	[self hidePlayerLabelsForPlayer:disconnectedPlayer];
+	[self hideActiveIndicatorForPlayer:disconnectedPlayer];
+	[self hideSnapIndicatorForPlayer:disconnectedPlayer];
+     */
 }
 
 #pragma mark - UIAlertViewDelegate
@@ -185,9 +207,6 @@
 {
 	if (buttonIndex != alertView.cancelButtonIndex)
 	{
-		// Stop any pending performSelector:withObject:afterDelay: messages.
-		[NSObject cancelPreviousPerformRequestsWithTarget:self];
-        
 		[self.game quitGameWithReason:QuitReasonUserQuit];
 	}
 }
