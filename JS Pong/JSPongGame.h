@@ -15,7 +15,10 @@
 
 - (void)gameWaitingForServerReady:(JSPongGame *)game;
 - (void)gameWaitingForClientsReady:(JSPongGame *)game;
+- (void)game:(JSPongGame *)game didMovePlayer:(JSPongPlayer *)player toPosition:(CGPoint)playerPosition;
+- (void)game:(JSPongGame *)game didMovePuckToPosition:(CGPoint)puckPosition;
 - (void)game:(JSPongGame *)game didQuitWithReason:(QuitReason)reason;
+- (void)gameDidSetup:(JSPongGame *)game;
 - (void)gameDidBegin:(JSPongGame *)game;
 - (void)game:(JSPongGame *)game playerDidDisconnect:(JSPongPlayer *)disconnectedPlayer;
 
@@ -29,6 +32,8 @@
 - (void)startClientGameWithSession:(GKSession *)session playerName:(NSString *)name server:(NSString *)peerID;
 - (void)startServerGameWithSession:(GKSession *)session playerName:(NSString *)name clients:(NSArray *)clients;
 - (void)quitGameWithReason:(QuitReason)reason;
-- (void)playerMovedPadToPosition:(CGRect *)position;
+- (void)setupPlayGroundWithRect:(CGRect) playGroundFrame;
+- (void)playerMovedPadToPosition:(CGPoint) position;
+- (void)faceOff;
 
 @end

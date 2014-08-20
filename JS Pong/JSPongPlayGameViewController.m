@@ -103,8 +103,12 @@
     
 //    [self.game playerMovedPadToPosition: CGRectMake( _myPad.frame.origin.x, (300 * theValue), _myPad.frame.size.width, _myPad.frame.size.height)];
     
-    [_myPad setFrame:CGRectMake( _myPad.frame.origin.x, (300 * theValue), _myPad.frame.size.width, _myPad.frame.size.height)];
+    [self.game playerMovedPadToPosition: CGPointMake(_myPad.frame.origin.x, (300 * theValue))];
+    
+    //[_myPad setFrame:CGRectMake( _myPad.frame.origin.x, (300 * theValue), _myPad.frame.size.width, _myPad.frame.size.height)];
 }
+
+/*
 
 - (void)faceOff
 {
@@ -123,13 +127,12 @@
     } else {
         _opponentPad.center = CGPointMake(_opponentPad.center.x, _opponentPad.center.y - 1);
     }
-    
 }
 
 - (void)gameLoop
 {
     [_puck puckMove];
-    [self opponentMove];
+    //[self opponentMove];
     if ((_puck.frame.origin.y < _playGround.frame.origin.y) || (_puck.frame.origin.y > _playGround.frame.origin.y + _playGround.frame.size.height))
     {
         [_puck wallBounce];
@@ -169,6 +172,8 @@
     timer = nil;
     [self faceOff];
 }
+ 
+*/
 
 #pragma mark - JSPongGameDelegate
 
@@ -182,9 +187,31 @@
     self.infoLabel.text = NSLocalizedString(@"Waiting for other players...", @"Status text: waiting for clients");
 }
 
+- (void)gameDidSetup:(JSPongGame *)game
+{
+     [self.game setupPlayGroundWithRect:(CGRect) _playGround.frame];
+}
+
 - (void)gameDidBegin:(JSPongGame *)game
 {
-    [self faceOff];
+    [self.game faceOff];
+}
+
+- (void)game:(JSPongGame *)game didMovePlayer:(JSPongPlayer *)player toPosition:(CGPoint)playerPosition
+{
+    NSLog(@"didMovePlayer player.isMyPlayer=%@", player.isMyPlayer ? @"YES" : @"NO");
+    if (player.isMyPlayer) {
+        _myPad.center = CGPointMake(_myPad.center.x, playerPosition.y);
+    }
+    else
+    {
+        _opponentPad.center = CGPointMake(_opponentPad.center.x, playerPosition.y);
+    }
+}
+
+- (void)game:(JSPongGame *)game didMovePuckToPosition:(CGPoint)puckPosition
+{
+    _puck.center = puckPosition;
 }
 
 - (void)game:(JSPongGame *)game didQuitWithReason:(QuitReason)reason
@@ -197,8 +224,7 @@
     /*
 	[self hidePlayerLabelsForPlayer:disconnectedPlayer];
 	[self hideActiveIndicatorForPlayer:disconnectedPlayer];
-	[self hideSnapIndicatorForPlayer:disconnectedPlayer];
-     */
+    */
 }
 
 #pragma mark - UIAlertViewDelegate

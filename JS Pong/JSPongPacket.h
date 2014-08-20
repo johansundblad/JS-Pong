@@ -16,14 +16,8 @@ typedef enum
 	PacketTypeServerReady,             // server to client
 	PacketTypeClientReady,             // client to server
     
-	PacketTypeDealCards,               // server to client
-	PacketTypeClientDealtCards,        // client to server
-    
-	PacketTypeActivatePlayer,          // server to client
-	PacketTypeClientTurnedCard,        // client to server
-    
-	PacketTypePlayerShouldSnap,        // client to server
-	PacketTypePlayerCalledSnap,        // server to client
+	PacketTypeMovePlayer,              // server to client
+	PacketTypeClientMovedPlayer,       // client to server
     
 	PacketTypeOtherClientQuit,         // server to client
 	PacketTypeServerQuit,              // server to client

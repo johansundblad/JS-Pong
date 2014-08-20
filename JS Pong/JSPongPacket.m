@@ -10,6 +10,8 @@
 #import "JSPongPacketSignInResponse.h"
 #import "JSPongPacketServerReady.h"
 #import "JSPongPacketOtherClientQuit.h"
+#import "JSPongPacketMovePlayer.h"
+#import "JSPongPacketClientMovedPlayer.h"
 #import "NSData+JSPongAdditions.h"
 
 const size_t PACKET_HEADER_SIZE = 10;
@@ -57,6 +59,14 @@ const size_t PACKET_HEADER_SIZE = 10;
             
         case PacketTypeServerReady:
 			packet = [JSPongPacketServerReady packetWithData:data];
+			break;
+            
+        case PacketTypeMovePlayer:
+			packet = [JSPongPacketMovePlayer packetWithData:data];
+			break;
+
+        case PacketTypeClientMovedPlayer:
+			packet = [JSPongPacketClientMovedPlayer packetWithData:data];
 			break;
             
         case PacketTypeOtherClientQuit:
