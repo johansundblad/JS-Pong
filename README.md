@@ -23,7 +23,7 @@ movements between server and client. Begun to move a lot of the game logic to a 
 to be responsible for keeping track of object movements on the screen. Broke most of the single game functionality as I
 moved the gameloop to the game model. 
 
-What's next: Rewrite the gameloop and let the puck move again. Rewrite the points calculation. Add a singleplayer mode to
+What's next: Rewrite the gameloop and let the puck move again. Rewrite the points calculation. Add a single player mode to
 the game model.
 
 
