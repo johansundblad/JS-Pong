@@ -20,7 +20,6 @@
 		1A626AD819913F8100CE50F1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1A626AD619913F8100CE50F1 /* InfoPlist.strings */; };
 		1A626ADA19913F8100CE50F1 /* JS_PongTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A626AD919913F8100CE50F1 /* JS_PongTests.m */; };
 		1A626AE41991412B00CE50F1 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A626AE31991412B00CE50F1 /* Main_iPhone.storyboard */; };
-		1A626AE6199141A700CE50F1 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A626AE5199141A700CE50F1 /* Main_iPad.storyboard */; };
 		1A626AEE1992460000CE50F1 /* JSPongMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A626AED1992460000CE50F1 /* JSPongMenuViewController.m */; };
 		1A626AF219925E3000CE50F1 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A626AF019925E3000CE50F1 /* bg.png */; };
 		1A626AF319925E3000CE50F1 /* pad.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A626AF119925E3000CE50F1 /* pad.png */; };
@@ -40,6 +39,7 @@
 		1AC89CB119A152E60046F4CB /* JSPongPacketOtherClientQuit.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC89CB019A152E60046F4CB /* JSPongPacketOtherClientQuit.m */; };
 		1AC89CB719A2AE420046F4CB /* JSPongPacketClientMovedPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC89CB619A2AE420046F4CB /* JSPongPacketClientMovedPlayer.m */; };
 		1AC89CBA19A2AE7A0046F4CB /* JSPongPacketMovePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC89CB919A2AE7A0046F4CB /* JSPongPacketMovePlayer.m */; };
+		1AD77B1819A4B4D000ADC313 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AD77B1719A4B4D000ADC313 /* Main_iPad.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,7 +70,6 @@
 		1A626AD719913F8100CE50F1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1A626AD919913F8100CE50F1 /* JS_PongTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JS_PongTests.m; sourceTree = "<group>"; };
 		1A626AE31991412B00CE50F1 /* Main_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPhone.storyboard; sourceTree = "<group>"; };
-		1A626AE5199141A700CE50F1 /* Main_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main_iPad.storyboard; path = ../Main_iPad.storyboard; sourceTree = "<group>"; };
 		1A626AEC1992460000CE50F1 /* JSPongMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSPongMenuViewController.h; sourceTree = "<group>"; };
 		1A626AED1992460000CE50F1 /* JSPongMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSPongMenuViewController.m; sourceTree = "<group>"; };
 		1A626AF019925E3000CE50F1 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
@@ -106,6 +105,7 @@
 		1AC89CB619A2AE420046F4CB /* JSPongPacketClientMovedPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSPongPacketClientMovedPlayer.m; sourceTree = "<group>"; };
 		1AC89CB819A2AE7A0046F4CB /* JSPongPacketMovePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSPongPacketMovePlayer.h; sourceTree = "<group>"; };
 		1AC89CB919A2AE7A0046F4CB /* JSPongPacketMovePlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSPongPacketMovePlayer.m; sourceTree = "<group>"; };
+		1AD77B1719A4B4D000ADC313 /* Main_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPad.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,7 +223,7 @@
 		1A626AE8199141CA00CE50F1 /* storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				1A626AE5199141A700CE50F1 /* Main_iPad.storyboard */,
+				1AD77B1719A4B4D000ADC313 /* Main_iPad.storyboard */,
 				1A626AE31991412B00CE50F1 /* Main_iPhone.storyboard */,
 			);
 			name = storyboards;
@@ -374,9 +374,9 @@
 			files = (
 				1A626AF219925E3000CE50F1 /* bg.png in Resources */,
 				1A626ABF19913F8100CE50F1 /* InfoPlist.strings in Resources */,
-				1A626AE6199141A700CE50F1 /* Main_iPad.storyboard in Resources */,
 				1A626AF319925E3000CE50F1 /* pad.png in Resources */,
 				1A626AC719913F8100CE50F1 /* Images.xcassets in Resources */,
+				1AD77B1819A4B4D000ADC313 /* Main_iPad.storyboard in Resources */,
 				1A626AE41991412B00CE50F1 /* Main_iPhone.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
