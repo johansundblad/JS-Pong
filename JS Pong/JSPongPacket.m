@@ -18,8 +18,6 @@ const size_t PACKET_HEADER_SIZE = 10;
 
 @implementation JSPongPacket
 
-//@synthesize packetType = _packetType;
-
 + (id)packetWithType:(PacketType)packetType
 {
 	return [[[self class] alloc] initWithType:packetType];
@@ -38,8 +36,6 @@ const size_t PACKET_HEADER_SIZE = 10;
 		NSLog(@"Error: Packet has invalid header");
 		return nil;
 	}
-    
-	int packetNumber = [data rw_int32AtOffset:4];
 	PacketType packetType = [data rw_int16AtOffset:8];
     
 	JSPongPacket *packet;

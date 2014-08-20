@@ -24,26 +24,23 @@
 {
 	size_t offset = PACKET_HEADER_SIZE;
 	size_t count;
-
-	NSString *peerID = [data rw_stringAtOffset:offset bytesRead:&count];
+    
+    NSString *peerID = [data rw_stringAtOffset:offset bytesRead:&count];
+	offset += count;
+    NSString *xPos = [data rw_stringAtOffset:offset bytesRead:&count];
+	offset += count;
+    NSString *yPos = [data rw_stringAtOffset:offset bytesRead:&count];
 	offset += count;
 
-	int xPosition = [data rw_int32AtOffset:offset];
-    offset += 4;
-    int yPosition = [data rw_int32AtOffset:offset];
-    
-    CGPoint position = CGPointMake(xPosition, yPosition);
-    NSLog(@"JSPongPacketClientMovedPlayer packetWithData x = %f, y = %f", position.x, position.y);
-
-
+    CGPoint position = CGPointMake(xPos.intValue, yPos.intValue);
 	return [[self class] packetWithPeerID:peerID position:position];
 }
 
 - (void)addPayloadToData:(NSMutableData *)data
 {
-	[data rw_appendString:self.peerID];
-	[data rw_appendInt32:(int)self.position.x];
-    [data rw_appendInt32:(int)self.position.y];
+    [data rw_appendString:self.peerID];
+    [data rw_appendString:[NSString stringWithFormat:@"%d", (int)self.position.x]];
+    [data rw_appendString:[NSString stringWithFormat:@"%d", (int)self.position.y]];
 }
 
 @end

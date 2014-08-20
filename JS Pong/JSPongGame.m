@@ -35,7 +35,8 @@ GameState;
 	NSString *_localPlayerName;
     NSMutableDictionary *_players;
     CGPoint _puckPosition;
-    CGPoint _puckOrigin;
+    int _puckHorizontalMove;
+    int _puckVerticalMove;
     CGRect _playGroundRect;
     NSTimer *timer;
 }
@@ -45,7 +46,6 @@ GameState;
 	if ((self = [super init]))
 	{
 		_players = [NSMutableDictionary dictionaryWithCapacity:2];
-        _puckPosition = CGPointMake(0, 0);
 	}
 	return self;
 }
@@ -159,6 +159,9 @@ GameState;
 {
     _state = GameStatePlaying;
     
+    _puckHorizontalMove = 1;
+    _puckVerticalMove = 1;
+    
     timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(gameLoop) userInfo:nil repeats:YES];
 }
 
@@ -166,6 +169,8 @@ GameState;
 {
 
     NSAssert(self.isServer, @"Must be server");
+    
+    _puckPosition = CGPointMake(_puckPosition.x + _puckHorizontalMove, _puckPosition.y + _puckVerticalMove);
 
     /*
     [_puck puckMove];
@@ -197,32 +202,9 @@ GameState;
      */
 }
 
-- (void)changeRelativePositionsOfPlayers
-{
-    /*
-	NSAssert(!self.isServer, @"Must be client");
-    
-	JSPongPlayer *myPlayer = [self playerWithPeerID:_session.peerID];
-	int diff = myPlayer.position;
-	myPlayer.position = PlayerPositionBottom;
-    
-	[_players enumerateKeysAndObjectsUsingBlock:^(id key, JSPongPlayer *obj, BOOL *stop)
-     {
-         if (obj != myPlayer)
-         {
-             obj.position = (obj.position - diff) % 4;
-         }
-     }];
-     */
-}
-
-
-
-
-
 - (void)playerMovedPadToPosition:(CGPoint) position
 {
-    NSLog(@"playerMovedPadToPosition peer = %@, x = %f, y = %f", _session.peerID, position.x, position.y);
+    //NSLog(@"playerMovedPadToPosition peer = %@, x = %f, y = %f", _session.peerID, position.x, position.y);
     if (self.isServer)
     {
         JSPongPlayer *player = [self playerWithPeerID:_session.peerID];
@@ -242,16 +224,17 @@ GameState;
 - (void)setupPlayGroundWithRect:(CGRect) playGroundRect
 {
     if (self.isServer) {
-        NSLog(@"setupPlayGroundWithRect %f, %f, %f, %f", playGroundRect.origin.x, playGroundRect.origin.y,
-              playGroundRect.size.width, playGroundRect.size.height);
+        //NSLog(@"setupPlayGroundWithRect %f, %f, %f, %f", playGroundRect.origin.x, playGroundRect.origin.y,
+        //      playGroundRect.size.width, playGroundRect.size.height);
     
         _playGroundRect = playGroundRect;
-        _puckOrigin = CGPointMake((_playGroundRect.origin.x + _playGroundRect.size.width / 2), (_playGroundRect.origin.y + _playGroundRect.size.height / 2));
+        _puckPosition = CGPointMake((_playGroundRect.origin.x + _playGroundRect.size.width / 2), playGroundRect.size.height / 2);
         int padMargin = (_playGroundRect.size.width / 20);
-        [self myPlayer].position = CGPointMake((_playGroundRect.size.width - padMargin), (_playGroundRect.origin.y + _playGroundRect.size.height / 2));
+        [self myPlayer].position = CGPointMake((_playGroundRect.size.width - padMargin), (_playGroundRect.size.height / 2));
         [self myPlayer].isMyPlayer = true;
-        [self opponentPlayer].position = CGPointMake(padMargin, (_playGroundRect.origin.y + _playGroundRect.size.height / 2));
+        [self opponentPlayer].position = CGPointMake(padMargin, (_playGroundRect.size.height / 2));
         
+        [self.delegate game:self didMovePuckToPosition: _puckPosition];
         [self.delegate game:self didMovePlayer:[self myPlayer] toPosition:[self myPlayer].position];
         [self.delegate game:self didMovePlayer:[self opponentPlayer] toPosition:[self opponentPlayer].position];
         
@@ -260,7 +243,10 @@ GameState;
         
         JSPongPacket *opponentPlayerPacket = [JSPongPacketMovePlayer packetWithPeerID:[self opponentPlayer].peerID position:[self opponentPlayer].position];
         [self sendPacketToAllClients:opponentPlayerPacket];
-
+        /*
+        JSPongPacket *puckPacket = [JSPongPacketMovePuck packetWithPeerID:_session.peerID position:_puckPosition;
+        [self sendPacketToAllClients:puckPacket];
+         */
     
         [self beginGame];
     }
@@ -412,7 +398,7 @@ GameState;
                 NSString *peerID = ((JSPongPacketClientMovedPlayer *)packet).peerID;
                 JSPongPlayer *player = [self playerWithPeerID:peerID];
                 player.position = ((JSPongPacketClientMovedPlayer *)packet).position;
-                NSLog(@"PacketTypeClientMovedPlayer player.position x = %f, y = %f", player.position.x, player.position.y);
+                //NSLog(@"PacketTypeClientMovedPlayer player.position x = %f, y = %f", player.position.x, player.position.y);
 
 
                 JSPongPacket *packet = [JSPongPacketMovePlayer packetWithPeerID:peerID position:player.position];
@@ -453,7 +439,6 @@ GameState;
             if (_state == GameStateWaitingForReady)
 			{
 				_players = ((JSPongPacketServerReady *)packet).players;
-				[self changeRelativePositionsOfPlayers];
                 
 				JSPongPacket *packet = [JSPongPacket packetWithType:PacketTypeClientReady];
 				[self sendPacketToServer:packet];
@@ -494,10 +479,11 @@ GameState;
 	NSString *peerID = packet.peerID;
 	CGPoint position = packet.position;
     
-    NSLog(@"handleMovePlayer peer = %@ x = %f, y = %f", peerID, position.x, position.y);
+    //NSLog(@"handleMovePlayer peer = %@ x = %f, y = %f", peerID, position.x, position.y);
 
     
 	JSPongPlayer *player = [self playerWithPeerID:peerID];
+    //NSLog(@"Player with peer: %@ = %@", peerID, player.name);
 	if (player != nil)
 	{
         player.position = position;

@@ -37,57 +37,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-/*
-- (IBAction)hostGameAction:(id)sender
-{
-    JSPongHostGameViewController *controller = [[JSPongHostGameViewController alloc] initWithNibName:@"HostViewController" bundle:nil];
-    controller.delegate = self;
 
-	if (_buttonsEnabled)
-	{
-		[self performExitAnimationWithCompletionBlock:^(BOOL finished)
-         {
-             HostViewController *controller = [[HostViewController alloc] initWithNibName:@"HostViewController" bundle:nil];
-             controller.delegate = self;
-             
-             [self presentViewController:controller animated:NO completion:nil];
-         }];
-	}
-
-}
-
-- (IBAction)joinGameAction:(id)sender
-{
-
-	if (_buttonsEnabled)
-	{
-		[self performExitAnimationWithCompletionBlock:^(BOOL finished)
-         {
-             JoinViewController *controller = [[JoinViewController alloc] initWithNibName:@"JoinViewController" bundle:nil];
-             controller.delegate = self;
-             
-             [self presentViewController:controller animated:NO completion:nil];
-         }];
-	}
-
-}
-
-- (IBAction)singlePlayerGameAction:(id)sender
-{
-
-	if (_buttonsEnabled)
-	{
-		[self performExitAnimationWithCompletionBlock:^(BOOL finished)
-         {
-             [self startGameWithBlock:^(Game *game)
-              {
-                  [game startSinglePlayerGame];
-              }];
-         }];
-	}
-
-}
-*/
 
 - (void)showNoNetworkAlert
 {
@@ -171,17 +121,10 @@
 
 - (void)hostViewController:(JSPongHostGameViewController *)controller startGameWithSession:(GKSession *)session playerName:(NSString *)name clients:(NSArray *)clients
 {
-	//_performAnimations = NO;
-    
-//	[self dismissViewControllerAnimated:NO completion:^
-//     {
-         //_performAnimations = YES;
-         
-         [self startGameWithBlock:^(JSPongGame *game)
-          {
-              [game startServerGameWithSession:session playerName:name clients:clients];
-          }];
-//     }];
+    [self startGameWithBlock:^(JSPongGame *game)
+    {
+        [game startServerGameWithSession:session playerName:name clients:clients];
+    }];
 }
 
 #pragma mark - JSPongJoinGameViewControllerDelegate
@@ -211,17 +154,10 @@
 
 - (void)joinViewController:(JSPongJoinGameViewController *)controller startGameWithSession:(GKSession *)session playerName:(NSString *)name server:(NSString *)peerID
 {
-	//_performAnimations = NO;
-    
-//	[self dismissViewControllerAnimated:NO completion:^
-//     {
-         //_performAnimations = YES;
-         
-         [self startGameWithBlock:^(JSPongGame *game)
-          {
-              [game startClientGameWithSession:session playerName:name server:peerID];
-          }];
-//     }];
+    [self startGameWithBlock:^(JSPongGame *game)
+    {
+        [game startClientGameWithSession:session playerName:name server:peerID];
+    }];
 }
 
 #pragma mark - JSPongPlayGameViewControllerDelegate
@@ -236,6 +172,5 @@
          }
      }];
 }
-
 
 @end

@@ -12,7 +12,6 @@
 @property (nonatomic, weak) IBOutlet UILabel *headingLabel;
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 @property (nonatomic, weak) IBOutlet UITextField *nameTextField;
-//@property (nonatomic, weak) IBOutlet UILabel *statusLabel;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 @end
@@ -123,14 +122,6 @@
     
 	if (_pongClient != nil)
 	{
-		// TODO: [self.view addSubview:self.waitView];
-        /*
-        self.headingLabel.text = @"Connecting...";
-        self.nameLabel.hidden = true;
-        self.nameTextField.hidden = true;
-        self.tableView.hidden = true;
-         */
-        
 		NSString *peerID = [_pongClient peerIDForAvailableServerAtIndex:indexPath.row];
 		[_pongClient connectToServerWithPeerID:peerID];
 	}

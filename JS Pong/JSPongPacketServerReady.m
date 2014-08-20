@@ -35,13 +35,9 @@
 		NSString *name = [data rw_stringAtOffset:offset bytesRead:&count];
 		offset += count;
         
-		//PlayerPosition position = [data rw_int8AtOffset:offset];
-		offset += 1;
-        
 		JSPongPlayer *player = [[JSPongPlayer alloc] init];
 		player.peerID = peerID;
 		player.name = name;
-		//player.position = position;
 		[players setObject:player forKey:player.peerID];
 	}
     
@@ -65,7 +61,6 @@
      {
          [data rw_appendString:player.peerID];
          [data rw_appendString:player.name];
-         // [data rw_appendInt8:player.position];
      }];
 }
 

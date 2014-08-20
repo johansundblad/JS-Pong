@@ -12,7 +12,6 @@
 @property (nonatomic, weak) IBOutlet UILabel *headingLabel;
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 @property (nonatomic, weak) IBOutlet UITextField *nameTextField;
-//@property (nonatomic, weak) IBOutlet UILabel *statusLabel;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UIButton *startButton;
 @end
@@ -110,9 +109,6 @@
 	
     if (cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        /* TODO
-		cell = [[PeerCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-     */
     
 	NSString *peerID = [_pongServer peerIDForConnectedClientAtIndex:indexPath.row];
 	cell.textLabel.text = [_pongServer displayNameForPeerID:peerID];

@@ -99,12 +99,8 @@
 
 - (IBAction)moveSliderMoves:(UISlider *)sender {
     float theValue = sender.value;
-    NSLog(@"move = %f", theValue);
-    
-//    [self.game playerMovedPadToPosition: CGRectMake( _myPad.frame.origin.x, (300 * theValue), _myPad.frame.size.width, _myPad.frame.size.height)];
     
     [self.game playerMovedPadToPosition: CGPointMake(_myPad.frame.origin.x, (300 * theValue))];
-    
     //[_myPad setFrame:CGRectMake( _myPad.frame.origin.x, (300 * theValue), _myPad.frame.size.width, _myPad.frame.size.height)];
 }
 
@@ -199,19 +195,22 @@
 
 - (void)game:(JSPongGame *)game didMovePlayer:(JSPongPlayer *)player toPosition:(CGPoint)playerPosition
 {
-    NSLog(@"didMovePlayer player.isMyPlayer=%@", player.isMyPlayer ? @"YES" : @"NO");
+    // NSLog(@"didMovePlayer player.isMyPlayer=%@", player.isMyPlayer ? @"YES" : @"NO");
+    int playGroundOffset = (int)_playGround.frame.origin.y;
+    
     if (player.isMyPlayer) {
-        _myPad.center = CGPointMake(_myPad.center.x, playerPosition.y);
+        _myPad.center = CGPointMake(_myPad.center.x, playerPosition.y + playGroundOffset);
     }
     else
     {
-        _opponentPad.center = CGPointMake(_opponentPad.center.x, playerPosition.y);
+        _opponentPad.center = CGPointMake(_opponentPad.center.x, playerPosition.y + playGroundOffset);
     }
 }
 
 - (void)game:(JSPongGame *)game didMovePuckToPosition:(CGPoint)puckPosition
 {
-    _puck.center = puckPosition;
+    int playGroundOffset = (int)_playGround.frame.origin.y;
+    _puck.center = CGPointMake(puckPosition.x, puckPosition.y + playGroundOffset);
 }
 
 - (void)game:(JSPongGame *)game didQuitWithReason:(QuitReason)reason
@@ -221,10 +220,6 @@
 
 - (void)game:(JSPongGame *)game playerDidDisconnect:(JSPongPlayer *)disconnectedPlayer
 {
-    /*
-	[self hidePlayerLabelsForPlayer:disconnectedPlayer];
-	[self hideActiveIndicatorForPlayer:disconnectedPlayer];
-    */
 }
 
 #pragma mark - UIAlertViewDelegate
